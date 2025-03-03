@@ -21,7 +21,7 @@ thickness = 5;
 // Connection offset
 c = 0.001;
 
-connected_length = hdd_length - 31;
+connected_length = hdd_length - 35;
 connected_height = hdd_height - 6;
 
 // Notch
@@ -53,23 +53,24 @@ difference() {
 // Latch
 latch_length = 25;
 latch_thickness = 2;
+latch_offset = 2;
 latch_lock_width = 7.5;
 
-translate([ connected_length, 0, thickness * 0.6 ]) {
+translate([ connected_length, 0, 0 ]) {
     rotate([ 0, -15, 0 ])
         cube([ latch_length, connected_height, latch_thickness ]);
 
     difference() {
         translate([
-            (latch_length / 2) - latch_lock_width / 2,
-            (connected_height / 2) - (latch_lock_width / 2), thickness / 2
+            latch_offset, (connected_height / 2) - (latch_lock_width / 2),
+            thickness / 2
         ]) {
             difference() {
                 cube([ latch_lock_width, latch_lock_width, thickness * 2 ]);
 
                 translate([
                     -latch_lock_width * 0.1, -latch_lock_width * 0.1,
-                    (latch_lock_width * tan(10))
+                    (latch_lock_width * tan(15)) - 2.5
                 ]) rotate([ 0, -30, 0 ])
                     cube([
                         latch_lock_width * 2, latch_lock_width * 1.2,
